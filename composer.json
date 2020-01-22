@@ -1,0 +1,13 @@
+{
+    "name": "avnovoselov/cut-it",
+    "description": "Link shortener",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "avnovoselov",
+            "email": "avnovoselov@gmail.com"
+        }
+    ],
+    "require": {}
+}
