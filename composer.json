@@ -9,5 +9,15 @@
             "email": "avnovoselov@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "php": "^7.1.0",
+        "ext-gmp": "*",
+        "vlucas/phpdotenv": "^4.1",
+        "phpunit/phpunit": "^8.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "CutIt\\": "src"
+        }
+    }
 }
