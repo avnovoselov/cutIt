@@ -12,8 +12,17 @@
     "require": {
         "php": "^7.1.0",
         "ext-gmp": "*",
+        "ext-pdo": "*",
         "vlucas/phpdotenv": "^4.1",
         "phpunit/phpunit": "^8.5"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "CutIt\\Application::install"
+        ],
+        "application-clear": [
+            "CutIt\\Application::clear"
+        ]
     },
     "autoload": {
         "psr-4": {

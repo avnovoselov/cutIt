@@ -4,6 +4,8 @@
 namespace CutIt;
 
 
+use DateInterval;
+use DateTime;
 use Exception;
 
 /**
@@ -28,9 +30,31 @@ final class Link
      * @param string $string
      * @return string
      */
-    private static function hash(string $string)
+    private static function hash(string $string): string
     {
         return hash('crc32', $string, false);
+    }
+
+    /**
+     * @return bool
+     * @throws Exception
+     */
+    public function save(): bool
+    {
+        $id = Converter::run($this->hash, 16, 10);
+        $created_at = new DateTime();
+        $expire_at = new DateTime();
+        $expire_at->add(new DateInterval("P2D"));
+
+        /** @noinspection PhpUnusedLocalVariableInspection */
+        list($sql, $result) = Application::getInstance()->getStorage()->prepare("INSERT INTO `link` (`id`, `link`, `created_at`, `expire_at`) VALUES (:id, :link, :created_at, :expire_at)", [
+            ":id"         => $id,
+            ":link"       => $this->url,
+            ":created_at" => $created_at->format("c"),
+            ":expire_at"  => $expire_at->format("c"),
+        ]);
+
+        return $result;
     }
 
     /**

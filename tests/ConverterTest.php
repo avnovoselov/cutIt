@@ -54,14 +54,19 @@ class ConverterTest extends TestCase
      */
     public function testRunRandom(): void
     {
-        $from = rand(10, 16);
-        $to = rand(10, 16);
+        $attempts = 100;
+        while ($attempts--) {
+            $to = rand(10, 16);
+            $number = rand(1111, 99999);
+            $this->assertEquals(Converter::run($number, $from = 10, $to), base_convert($number, $from, $to), "from {$from} to {$to}");
+        }
 
-        $number = rand(1111, 99999);
+        $to = rand(2, 15);
+        $number = bin2hex(random_bytes(3));
 
-        $i = 100;
-        while ($i--) {
-            $this->assertEquals(Converter::run($number, $from, $to), base_convert($number, $from, $to), "from {$from} to {$to}");
+        $attempts = 100;
+        while ($attempts--) {
+            $this->assertEquals(Converter::run($number, $from = 16, $to), base_convert($number, $from, $to), "from {$from} to {$to}");
         }
     }
 }
